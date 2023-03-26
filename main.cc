@@ -11,7 +11,6 @@ int main(int argc, char* argv[]){
   cin.exceptions(ios::eofbit | ios::failbit);
   string cmd;
   Grid g;
-
   // Add code here
   bool bTurn = true;
   Colour color;
@@ -19,12 +18,14 @@ int main(int argc, char* argv[]){
   try{
     while (true){
       cin >> cmd;
+      if (cin.eof()) break;
       if (cmd == "new"){
         int n;
         cin >> n;
         if (n >= 4 && (n / 2) * 2 == n){
           g.init(n);
           size_t mid = n / 2;
+          // add 4 initial pieces
           g.setPiece(mid - 1, mid - 1, Colour::Black);
           g.setPiece(mid, mid, Colour::Black);
           g.setPiece(mid - 1, mid, Colour::White);
@@ -50,6 +51,18 @@ int main(int argc, char* argv[]){
         } else{
           continue;
         }
+      }
+      // check if the game is over
+      if (g.isFull()){
+        color = g.whoWon();
+        if (color == Colour::Black){
+          cout << "Black wins!" << endl;
+        } else if (color == Colour::White){
+          cout << "White wins!" << endl;
+        } else{
+          cout << "Tie!" << endl;
+        }
+        break;
       }
     }
   }
