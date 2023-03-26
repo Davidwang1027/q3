@@ -13,36 +13,39 @@ void Grid::toggle(size_t r, size_t c){
 }
 
 bool Grid::setPiece(size_t r, size_t c, Colour colour){
-    size_t size = theGrid.size();
-    if (r <= size && c <= size && theGrid[r][c].getInfo().colour == Colour::NoColour){
+    // convert into signed int
+    int row = r;
+    int col = c;
+    int size = theGrid.size();
+    if (row <= size && col <= size && theGrid[row][col].getInfo().colour == Colour::NoColour){
 
         // attach the neighbours
         // check if r-1 is valid and attach
-        if (r - 1 >= 0){
+        if (row - 1 >= 0){
             theGrid[r][c].attach(&theGrid[r - 1][c]);
-            if (c - 1 >= 0){
+            if (col - 1 >= 0){
                 theGrid[r][c].attach(&theGrid[r - 1][c - 1]);
             }
-            if (c + 1 < size){
+            if (col + 1 < size){
                 theGrid[r][c].attach(&theGrid[r - 1][c + 1]);
             }
         }
         // check if r+1 is valid and attach
-        if (r + 1 < size){
+        if (row + 1 < size){
             theGrid[r][c].attach(&theGrid[r + 1][c]);
-            if (c - 1 >= 0){
+            if (col - 1 >= 0){
                 theGrid[r][c].attach(&theGrid[r + 1][c - 1]);
             }
-            if (c + 1 < size){
+            if (col + 1 < size){
                 theGrid[r][c].attach(&theGrid[r + 1][c + 1]);
             }
         }
         // check if c-1 is valid and attach
-        if (c - 1 >= 0){
+        if (col - 1 >= 0){
             theGrid[r][c].attach(&theGrid[r][c - 1]);
         }
         // check if c+1 is valid and attach
-        if (c + 1 < size){
+        if (col + 1 < size){
             theGrid[r][c].attach(&theGrid[r][c + 1]);
         }
 
