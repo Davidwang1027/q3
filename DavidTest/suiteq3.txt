@@ -1,0 +1,10 @@
+blackWin
+diagonalEat
+grid
+gridOnly
+horizontalEat
+incompleteMatch
+sample
+tie
+verticalEat
+whiteWin
